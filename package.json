@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/material": "^7.1.0",
     "chart.js": "^4.4.9",
     "clsx": "^2.1.1",
     "mobx": "^6.13.7",

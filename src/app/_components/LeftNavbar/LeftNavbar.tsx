@@ -1,5 +1,5 @@
-// import styles from "./LeftNavbar.module.scss";
+import styles from "./LeftNavbar.module.scss";
 
 export const LeftNavbar = () => {
-  return <></>;
+  return <div className={styles.root}>test</div>;
 };

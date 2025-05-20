@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 8px;
+  height: 100%;
+  // overflow-y: scroll;
+  background-color: var(--gs-second-background-color);
+  width: 380px;
+}
