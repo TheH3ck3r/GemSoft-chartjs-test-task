@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 import { charts } from "../../charts";
 import { ChartData, ChartDataRequest, Point } from "@/types/api";
 
-const generateData = (): Point[] =>
+const generateData = (): Array<Point> =>
   Array.from({ length: 10 }, (_, i) => ({
     x: i + 1,
     y: parseFloat((Math.random() * 100).toFixed(2)),
   }));
 
-const chartDataMap: Record<string, Point[]> = Object.fromEntries(
+const chartDataMap: Record<string, Array<Point>> = Object.fromEntries(
   charts.map((chart) => [chart.uuid, generateData()])
 );
 
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid ids array" }, { status: 400 });
   }
 
-  const result: ChartData[] = ids
+  const result: Array<ChartData> = ids
     .filter((id) => chartDataMap[id])
     .map((uuid) => ({
       uuid,

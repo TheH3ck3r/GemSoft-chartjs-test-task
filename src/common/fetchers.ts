@@ -50,5 +50,7 @@ export const post = <T>(url: string, body: unknown) =>
 
 export const getChartSummary = () => get<ChartSummary[]>(`/api/charts`);
 
-export const getChartData = (ids: string[]) =>
-  post<ChartData[]>("/api/charts/data", { ids } satisfies ChartDataRequest);
+export const getChartData = (ids: Array<string>) =>
+  post<Array<ChartData>>("/api/charts/data", {
+    ids,
+  } satisfies ChartDataRequest);
