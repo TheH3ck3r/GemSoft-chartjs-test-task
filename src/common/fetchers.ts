@@ -1,0 +1,54 @@
+import { ChartData, ChartDataRequest, ChartSummary } from "@/types/api";
+
+export class ApiError extends Error {
+  constructor(
+    public message: string,
+    public status: number,
+    public responseText?: string
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+
+const request = async <T>(
+  url: string,
+  method: HttpMethod,
+  body?: unknown
+): Promise<T> => {
+  try {
+    const res = await fetch(`${url}`, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new ApiError(text || "Ошибка запроса", res.status, text);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error(`Ошибка ${method} ${url}:`, error);
+    throw error;
+  }
+};
+
+// ----------| Обёртки |----------
+
+export const get = <T>(url: string) => request<T>(url, "GET");
+
+export const post = <T>(url: string, body: unknown) =>
+  request<T>(url, "POST", body);
+
+// ----------| charts |----------
+
+export const getChartSummary = () => get<ChartSummary[]>(`/api/charts`);
+
+export const getChartData = (ids: string[]) =>
+  post<ChartData[]>("/api/charts/data", { ids } satisfies ChartDataRequest);
