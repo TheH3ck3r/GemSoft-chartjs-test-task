@@ -16,6 +16,10 @@ export class SelectedChartsStore {
     return this.selectedCharts;
   }
 
+  get getSelectedIds(): string[] {
+    return this.selectedCharts.map((chart) => chart.uuid);
+  }
+
   get getSelectedNames(): string[] {
     return this.selectedCharts.map((chart) => chart.name);
   }

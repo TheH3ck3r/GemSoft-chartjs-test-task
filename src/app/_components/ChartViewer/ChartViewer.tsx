@@ -23,14 +23,15 @@ ChartJS.register(
 
 interface Props {
   chart: ChartApiData;
+  name: string;
 }
 
-export const ChartViewer = ({ chart }: Props) => {
+export const ChartViewer = ({ chart, name }: Props) => {
   const data = {
     labels: chart.data.map((point) => point.x),
     datasets: [
       {
-        label: chart.uuid,
+        label: name,
         data: chart.data.map((point) => point.y),
         borderColor: "rgba(75,192,192,1)",
         backgroundColor: "rgba(75,192,192,0.2)",

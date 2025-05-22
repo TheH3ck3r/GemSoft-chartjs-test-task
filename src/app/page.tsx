@@ -2,31 +2,32 @@
 
 import { LeftNavbar } from "./_components/LeftNavbar";
 import { Data } from "./_components/Data";
-import { useEffect, useState } from "react";
-import { ChartSummary } from "@/types/api";
-import { getChartSummary } from "@/common/fetchers";
-import { CircularProgress } from "@mui/material";
+import { useEffect } from "react";
+import { getChartSummary, getChartData } from "@/common/fetchers";
 import styles from "./page.module.scss";
+import selectedChartsStore from "@/common/stores/selectedChartsStore";
+import chartDataStore from "@/common/stores/chartsDataStore";
 
 export default function Home() {
-  const [chartSummary, setChartSummary] = useState<ChartSummary[]>([]);
-
   useEffect(() => {
-    getChartSummary().then(setChartSummary);
-  }, []);
+    const fetchData = async () => {
+      const summary = await getChartSummary();
+      selectedChartsStore.setSelectedChartsData(summary);
 
-  const ids = chartSummary.map((chart) => chart.uuid);
+      const ids = selectedChartsStore.getSelectedIds;
+
+      const data = await getChartData(ids);
+
+      chartDataStore.setSChartsData(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className={styles.root}>
-      <LeftNavbar chartSummary={chartSummary} />
-      {chartSummary.length !== 0 ? (
-        <Data chartsIds={ids} />
-      ) : (
-        <div className={styles.loading}>
-          <CircularProgress />
-        </div>
-      )}
+      <LeftNavbar />
+      <Data />
     </div>
   );
 }

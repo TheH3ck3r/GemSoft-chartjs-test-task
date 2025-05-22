@@ -1,27 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getChartData } from "@/common/fetchers";
-import { ChartData } from "@/types/api";
 import { ChartViewer } from "../ChartViewer";
 import styles from "./Data.module.scss";
+import { observer } from "mobx-react-lite";
+import chartDataStore from "@/common/stores/chartsDataStore";
+import { CircularProgress } from "@mui/material";
+import selectedChartsStore from "@/common/stores/selectedChartsStore";
 
-export type DataProps = {
-  chartsIds: Array<string>;
-};
+export const Data = observer(() => {
+  const charts = chartDataStore.getChartsData;
 
-export const Data = ({ chartsIds }: DataProps) => {
-  const [charts, setCharts] = useState<ChartData[]>([]);
+  const getChartNameById = (uuid: string): string => {
+    const chart = selectedChartsStore.selectedCharts.find(
+      (c) => c.uuid === uuid
+    );
+    return chart ? chart.name : "Без имени";
+  };
 
-  useEffect(() => {
-    getChartData(chartsIds).then(setCharts);
-  }, []);
+  if (charts.length === 0) {
+    return (
+      <div className={styles.spinner}>
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.root}>
       {charts.map((chart) => (
-        <ChartViewer key={chart.uuid} chart={chart} />
+        <ChartViewer
+          key={chart.uuid}
+          chart={chart}
+          name={getChartNameById(chart.uuid)}
+        />
       ))}
     </div>
   );
-};
+});
