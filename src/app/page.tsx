@@ -5,6 +5,7 @@ import { Data } from "./_components/Data";
 import { useEffect, useState } from "react";
 import { ChartSummary } from "@/types/api";
 import { getChartSummary } from "@/common/fetchers";
+import { CircularProgress } from "@mui/material";
 import styles from "./page.module.scss";
 
 export default function Home() {
@@ -20,7 +21,13 @@ export default function Home() {
   return (
     <div className={styles.root}>
       <LeftNavbar chartSummary={chartSummary} />
-      {chartSummary.length !== 0 && <Data chartsIds={ids} />}
+      {chartSummary.length !== 0 ? (
+        <Data chartsIds={ids} />
+      ) : (
+        <div className={styles.loading}>
+          <CircularProgress />
+        </div>
+      )}
     </div>
   );
 }
