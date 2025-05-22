@@ -12,7 +12,7 @@ export const Data = observer(() => {
 
   const getChartNameById = (uuid: string): string => {
     const chart = selectedChartsStore.selectedCharts.find(
-      (c) => c.uuid === uuid
+      (chart) => chart.uuid === uuid
     );
     return chart ? chart.name : "Без имени";
   };

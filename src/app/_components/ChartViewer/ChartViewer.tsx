@@ -21,12 +21,12 @@ ChartJS.register(
   Legend
 );
 
-interface Props {
+export type ChartViewer = {
   chart: ChartApiData;
   name: string;
-}
+};
 
-export const ChartViewer = ({ chart, name }: Props) => {
+export const ChartViewer = ({ chart, name }: ChartViewer) => {
   const data = {
     labels: chart.data.map((point) => point.x),
     datasets: [
