@@ -16,7 +16,6 @@ export default function Home() {
   }, []);
 
   const ids = chartSummary.map((chart) => chart.uuid);
-  console.log(ids);
 
   return (
     <div className={styles.root}>
