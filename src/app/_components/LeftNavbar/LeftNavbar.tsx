@@ -4,11 +4,11 @@ import styles from "./LeftNavbar.module.scss";
 import { ChartSummary } from "@/types/api";
 import { CircularProgress } from "@mui/material";
 import { ChartCheckPanel } from "../ChartCheckPanel";
-import selectedChartsStore from "@/common/stores/selectedChartsStore";
+import chartsStore from "@/common/stores/chartsStore";
 import { observer } from "mobx-react-lite";
 
 export const LeftNavbar = observer(() => {
-  const chartSummary = selectedChartsStore.getSelectedCharts;
+  const chartSummary = chartsStore.getSelectedCharts;
 
   if (chartSummary.length === 0) {
     return (

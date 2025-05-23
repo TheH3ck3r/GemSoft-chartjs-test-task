@@ -3,15 +3,15 @@
 import { ChartViewer } from "../ChartViewer";
 import styles from "./Data.module.scss";
 import { observer } from "mobx-react-lite";
-import chartDataStore from "@/common/stores/chartsDataStore";
+import chartsDataStore from "@/common/stores/chartsDataStore";
 import { CircularProgress } from "@mui/material";
-import selectedChartsStore from "@/common/stores/selectedChartsStore";
+import chartsStore from "@/common/stores/chartsStore";
 
 export const Data = observer(() => {
-  const charts = chartDataStore.getChartsData;
+  const charts = chartsDataStore.getChartsData;
 
   const getChartNameById = (uuid: string): string => {
-    const chart = selectedChartsStore.selectedCharts.find(
+    const chart = chartsStore.selectedCharts.find(
       (chart) => chart.uuid === uuid
     );
     return chart ? chart.name : "Без имени";

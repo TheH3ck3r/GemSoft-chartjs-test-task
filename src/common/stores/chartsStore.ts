@@ -1,7 +1,7 @@
 import { ChartSummary } from "@/types/api";
 import { makeAutoObservable } from "mobx";
 
-export class SelectedChartsStore {
+export class ChartsStore {
   selectedCharts: ChartSummary[] = [];
 
   constructor() {
@@ -25,6 +25,6 @@ export class SelectedChartsStore {
   }
 }
 
-const selectedChartsStore = new SelectedChartsStore();
+const chartsStore = new ChartsStore();
 
-export default selectedChartsStore;
+export default chartsStore;

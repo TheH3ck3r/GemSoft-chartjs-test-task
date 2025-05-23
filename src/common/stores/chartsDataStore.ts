@@ -1,7 +1,7 @@
 import { ChartData } from "@/types/api";
 import { makeAutoObservable } from "mobx";
 
-export class ChartDataStore {
+export class ChartsDataStore {
   chartsData: ChartData[] = [];
 
   constructor() {
@@ -17,6 +17,6 @@ export class ChartDataStore {
   }
 }
 
-const chartDataStore = new ChartDataStore();
+const chartsDataStore = new ChartsDataStore();
 
-export default chartDataStore;
+export default chartsDataStore;
