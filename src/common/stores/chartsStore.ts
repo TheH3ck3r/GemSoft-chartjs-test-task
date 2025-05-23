@@ -2,26 +2,26 @@ import { ChartSummary } from "@/types/api";
 import { makeAutoObservable } from "mobx";
 
 export class ChartsStore {
-  selectedCharts: ChartSummary[] = [];
+  charts: ChartSummary[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setSelectedChartsData(data: ChartSummary[]) {
-    this.selectedCharts = data;
+  setCharts(data: ChartSummary[]) {
+    this.charts = data;
   }
 
-  get getSelectedCharts(): ChartSummary[] {
-    return this.selectedCharts;
+  get getCharts(): ChartSummary[] {
+    return this.charts;
   }
 
-  get getSelectedIds(): string[] {
-    return this.selectedCharts.map((chart) => chart.uuid);
+  get getChartsIds(): string[] {
+    return this.charts.map((chart) => chart.uuid);
   }
 
-  get getSelectedNames(): string[] {
-    return this.selectedCharts.map((chart) => chart.name);
+  get getChartsNames(): string[] {
+    return this.charts.map((chart) => chart.name);
   }
 }
 

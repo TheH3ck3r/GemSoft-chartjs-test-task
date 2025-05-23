@@ -7,14 +7,16 @@ import { getChartSummary, getChartData } from "@/common/fetchers";
 import styles from "./page.module.scss";
 import chartsStore from "@/common/stores/chartsStore";
 import chartsDataStore from "@/common/stores/chartsDataStore";
+import selectedChartsStore from "@/common/stores/selectedChartsStore";
 
 export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const summary = await getChartSummary();
-      chartsStore.setSelectedChartsData(summary);
+      chartsStore.setCharts(summary);
+      selectedChartsStore.setSelectedCharts(summary);
 
-      const ids = chartsStore.getSelectedIds;
+      const ids = chartsStore.getChartsIds;
 
       const data = await getChartData(ids);
 

@@ -8,7 +8,7 @@ import chartsStore from "@/common/stores/chartsStore";
 import { observer } from "mobx-react-lite";
 
 export const LeftNavbar = observer(() => {
-  const chartSummary = chartsStore.getSelectedCharts;
+  const chartSummary = chartsStore.getCharts;
 
   if (chartSummary.length === 0) {
     return (
